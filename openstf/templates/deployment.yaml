@@ -59,9 +59,9 @@ spec:
         - --port
         - "3000"
         -  --auth-url
-        - "https://{{ .Values.ingress.hostname }}/auth/mock/"
+        - "http://{{ .Values.ingress.hostname }}/auth/mock/"
         - --websocket-url
-        - "https://{{ .Values.ingress.hostname }}/"
+        - "http://{{ .Values.ingress.hostname }}/"
         env:
         - name: RETHINKDB_PORT_28015_TCP
           value: "tcp://{{.Values.db.url}}:{{.Values.db.port}}"
@@ -101,7 +101,7 @@ spec:
         - --port
         - "3000"
         - --app-url
-        - "https://{{ .Values.ingress.hostname }}/"
+        - "http://{{ .Values.ingress.hostname }}/"
         ports:
         - containerPort: 3000
         envFrom:
@@ -207,7 +207,7 @@ spec:
         - --port
         - "3000"
         - --storage-url
-        - "https://{{ .Values.ingress.hostname }}/"
+        - "http://{{ .Values.ingress.hostname }}/"
         envFrom:
         - configMapRef:
             name: "{{ template "fullname" . }}-common-environment-variables"
@@ -237,7 +237,7 @@ spec:
         - --port
         - "3000"
         - --storage-url
-        - "https://{{ .Values.ingress.hostname }}/"
+        - "http://{{ .Values.ingress.hostname }}/"
         envFrom:
         - configMapRef:
             name: "{{ template "fullname" . }}-common-environment-variables"
@@ -387,7 +387,7 @@ spec:
         - --port
         - "3000"
         - --storage-url
-        - "https://{{ .Values.ingress.hostname }}/"
+        - "http://{{ .Values.ingress.hostname }}/"
         - --connect-sub
         - "tcp://{{ template "fullname" . }}-triproxy-app:7150"
         - --connect-push
