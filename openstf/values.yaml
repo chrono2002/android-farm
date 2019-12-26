@@ -1,7 +1,7 @@
 stf:
   image:
     repository: openstf/stf
-    tag: v3.2.0
+    tag: v3.4.1
     pullPolicy: IfNotPresent
   api:
     replicas: 3
@@ -203,7 +203,7 @@ emulators:
 telegraf:
   image:
     repository: "telegraf"
-    tag: "1.5-alpine"
+    tag: "1.11-alpine"
     pullPolicy: IfNotPresent
   resources:
     requests:
