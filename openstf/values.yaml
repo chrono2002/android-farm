@@ -1,7 +1,8 @@
 stf:
   image:
     repository: openstf/stf
-    tag: v3.4.1
+    tag: v3.4.2
+#    tag: v3.4.1
     pullPolicy: IfNotPresent
   api:
     replicas: 3

@@ -24,6 +24,10 @@ spec:
         - "tcp://{{ template "fullname" . }}-triproxy-app:7150"
         - --connect-push
         - "tcp://{{ template "fullname" . }}-triproxy-app:7170"
+        - --connect-sub-dev
+        - "tcp://{{ template "fullname" . }}-triproxy-dev:7250"
+        - --connect-push-dev
+        - "tcp://{{ template "fullname" . }}-triproxy-dev:7270"
         env:
         - name: RETHINKDB_PORT_28015_TCP
           value: "tcp://{{.Values.db.url}}:{{.Values.db.port}}"
@@ -102,6 +106,11 @@ spec:
         - "3000"
         - --app-url
         - "http://{{ .Values.ingress.hostname }}/"
+        env:
+        - name: RETHINKDB_PORT_28015_TCP
+          value: "tcp://{{.Values.db.url}}:{{.Values.db.port}}"
+        - name: RETHINKDB_ENV_AUTHKEY
+          value: "{{.Values.db.password}}"
         ports:
         - containerPort: 3000
         envFrom:
