@@ -5,6 +5,7 @@ metadata:
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 data:
+  EMULATOR_OPTS: "-screen multi-touch -no-boot-anim -noaudio -nojni -netfast -verbose -skip-adb-auth -snapshot default -no-snapshot-save"
   ZMQ_TCP_KEEPALIVE: "1"
   ZMQ_TCP_KEEPALIVE_IDLE: "60"
 ---
