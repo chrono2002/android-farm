@@ -1,9 +1,12 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-api
 spec:
   replicas: {{ .Values.stf.api.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-api
   template:
     metadata:
       labels:
@@ -40,12 +43,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-app
 spec:
   replicas: {{ .Values.stf.app.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-app
   template:
     metadata:
       labels:
@@ -82,12 +88,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-auth
 spec:
   replicas: {{ .Values.stf.auth.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-auth
   template:
     metadata:
       labels:
@@ -121,12 +130,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-processor
 spec:
   replicas: {{ .Values.stf.processor.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-processor
   template:
     metadata:
       labels:
@@ -157,12 +169,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-reaper
 spec:
   replicas: {{ .Values.stf.reaper.replicas}}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-reaper
   template:
     metadata:
       labels:
@@ -195,12 +210,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-apk-storage
 spec:
   replicas: {{ .Values.stf.apkStorage.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-apk-storage
   template:
     metadata:
       labels:
@@ -225,12 +243,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-img-storage
 spec:
   replicas: {{ .Values.stf.imgStorage.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-img-storage
   template:
     metadata:
       labels:
@@ -255,12 +276,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-storage
 spec:
   replicas: {{ .Values.stf.storage.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-storage
   template:
     metadata:
       labels:
@@ -293,12 +317,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-triproxy-dev
 spec:
   replicas: {{ .Values.stf.triproxyDev.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-triproxy-dev
   template:
     metadata:
       labels:
@@ -333,12 +360,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-triproxy-app
 spec:
   replicas: {{ .Values.stf.triproxyApp.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-triproxy-app
   template:
     metadata:
       labels:
@@ -373,12 +403,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-websocket
 spec:
   replicas: {{ .Values.stf.websocket.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-websocket
   template:
     metadata:
       labels:
@@ -416,12 +449,15 @@ spec:
       imagePullSecrets:
         - name: {{ .Values.pullSecret }}
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-nginx
 spec:
   replicas: {{ .Values.nginx.replicas }}
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-nginx
   template:
     metadata:
       labels:
@@ -453,12 +489,15 @@ spec:
               - key: nginx.conf
                 path: nginx.conf
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" . }}-telegraf
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-telegraf
   template:
     metadata:
       {{- if .Values.telegraf.config.outputs.prometheus.enabled }}

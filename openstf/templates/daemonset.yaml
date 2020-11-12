@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: {{ template "fullname" . }}-provider-real
@@ -6,6 +6,12 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
     app: {{ template "fullname" . }}-provider-real
 spec:
+  selector:
+    matchLabels:
+      app: {{ template "fullname" . }}-provider-real
+      chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+      release: "{{ .Release.Name }}"
+      heritage: "{{ .Release.Service }}"
   template:
     metadata:
       {{- if .Values.telegraf.config.outputs.prometheus.enabled }}

@@ -1,7 +1,7 @@
 {{- $root := . -}}
 {{- range $type := .Values.emulators.types }}
 {{- range $emu := .instances }}
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ template "fullname" $root }}-provider-{{ $type.name }}-{{ $emu.version }}
@@ -11,6 +11,9 @@ spec:
     rollingUpdate:
       maxUnavailable: 25%
       maxSurge: 25%
+  selector:
+    matchLabels:
+      app: {{ template "fullname" $root }}-provider-{{ $type.name }}-{{ $emu.version }}
   template:
     metadata:
       labels:
