@@ -17,7 +17,7 @@ metadata:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
 data:
   nginx.conf: |
-    worker_processes {{ .Values.nginx.resources.limits.cpu }};
+    worker_processes 1;
     events {
       worker_connections 1024;
     }
